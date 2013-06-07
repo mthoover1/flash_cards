@@ -15,7 +15,7 @@
 <h2>Rounds Played</h2>
 
 <ul>
-  <% @rounds.each do |round| %>
+  <% @rounds.reverse_order.each do |round| %>
   <li>Game: <%= round.name %> | Date: <%= round.created_at %> | Score: <%= round.score %> </li>
   <% end %>
 </ul>
