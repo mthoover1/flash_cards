@@ -7,6 +7,10 @@ get '/login' do
   erb :log_in
 end
 
+get '/logout' do
+  session.clear
+end 
+
 get '/decks' do
   @decks = Deck.all
   @round = Round.create
@@ -47,3 +51,4 @@ post '/login' do
     redirect to '/'
   end
 end
+
