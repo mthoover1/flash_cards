@@ -36,9 +36,10 @@ get '/rounds/:deck_id/:round_id' do
   end
 end
 
-# post '/rounds/:deck_id/:card_id' do
-#   @guess = Guess.create(params[:form])
-# end
+post '/rounds/:deck_id/:round_id' do
+  @guess = Guess.create(params[:form])
+  redirect "/rounds/#{params[:deck_id]}/#{params[:round_id]}"
+end
 
 get '/rounds/:round_id/results' do
   @round = Round.find_by_id(params[:round_id])

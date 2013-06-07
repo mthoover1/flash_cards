@@ -1,6 +1,6 @@
 <div class="container">
       <span class='card'><%= @card.prompt %></span>
-      <form action='/rounds/<%= @deck.id %>/<%= @card.id %>' method='post'>
+      <form action='/rounds/<%= @deck.id %>/<%= @round.id %>' method='post'>
         <input type="text" name="form[response]">
         <input type='hidden' name="form[card_id]" value="<%= @card.id %>">
         <input type='hidden' name="form[round_id]" value="<%= @round.id %>">
