@@ -10,14 +10,26 @@
   <!--
     application.css is where you put your styles
   -->
+  <link rel='stylesheet' href='/css/boostrap.css'>
+  <link rel='stylesheet' href='/css/flat-ui.css'>
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src='/js/bootstrap.min.js'></script>
   <script src="/js/application.js"></script>
 
   <title></title>
 </head>
 <body>
+ <!-- <% if logged_in? %> -->
+    <nav class="top-nav">
+      <ul>
+        <li><span class="fui-user"></span>profile</li>
+        <li><span class="fui-checkbox-checked">trivia</span></li>
+        <li><span class="fui-cross">logout</span></li>
+      </ul>
+    </nav>
+  <!-- <% end %> -->
   <%= yield %>
 </body>
 </html>
