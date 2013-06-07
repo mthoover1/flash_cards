@@ -4,7 +4,7 @@ class CreateGuesses < ActiveRecord::Migration
       t.integer :round_id
       t.integer :card_id
       t.string  :response
-      t.integer :correctness
+      t.integer :correctness, default: 0
       t.timestamps
     end
   end
