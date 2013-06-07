@@ -1,0 +1,11 @@
+<div class="container">
+    <% @deck.cards.each do |card| %>
+      <span class='card'><%= card.prompt %></span>
+      <span class='card'><%= card.solution %></span>
+    <% end %>
+</div>
+
+<a href='/decks/<%= @deck.id %>'>PLAY DECK AGAIN</a>
+<a href='/decks'>SELECT NEW DECK</a>
+<a href='/rounds/<%= @round.id %>'>ROUND RESULTS</a>
+

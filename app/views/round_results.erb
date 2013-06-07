@@ -1,0 +1,9 @@
+<div class="container">
+    <% @guesses.each do |guess| %>
+      <span class='guess'><%= guess.response %></span>
+      <span class='guess'><%= guess.correctness %></span>
+    <% end %>
+</div>
+
+<a href='/rounds/<%= @guesses.first.round.deck_id %>'>PLAY DECK AGAIN</a>
+<a href='/decks'>SELECT NEW DECK</a>
