@@ -140,12 +140,12 @@ movies_list = [ ["Raiders of the Lost Ark", 1981],
 movies = Deck.create(name: "Movies")
 
 movies_list.each do |movie|
-  movies << Card.create(prompt: movie[0], solution: movie[1])
+  movies.cards << Card.create(prompt: movie[0], solution: movie[1])
 end
 
 
 capitals = Deck.create(name: "State Capitals")
 
 capitals_list.each do |capital|
-  capitals << Card.create(prompt: capital[0], solution: capital[1])
+  capitals.cards << Card.create(prompt: capital[0], solution: capital[1])
 end
