@@ -52,3 +52,9 @@ post '/login' do
   end
 end
 
+post '/user' do
+  @user = current_user
+  redirect to '/login' unless @user
+  erb :user
+end
+

@@ -8,6 +8,6 @@ class Guess < ActiveRecord::Base
   before_save :check_answer
 
   def check_answer
-    self.correctness = 1 if self.response == Card.find(card_id).solution
+    self.correctness = 1 if self.response.downcase.gsub(".", "") == Card.find(card_id).solution.downcase.gsub(".", "")
   end
 end

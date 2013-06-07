@@ -1,0 +1,21 @@
+<h2><%= @user.name %></h2>
+
+<h2>Last game played was <deck played></h2>
+
+<h2>Your high score for State Capitals game:</h2>
+
+<h2>Your high score for Movie Years game:</h2>
+
+<% your_new_hometown = Deck.find_by_name("State Capitols").cards.sample %>
+
+<h2>Have you considered moving to <%= your_new_hometown.solution %>, <%= your_new_hometown.prompt %>?</h2>
+
+<h2>You should watch <%= Deck.find_by_name("Movies").cards.sample.name %>! It is especially relevant to your life right now!</h2>
+
+<h2>Rounds Played</h2>
+
+<ul>
+  <% @rounds.reverse_order.each do |round| %>
+  <li>Game: <%= round.name %> | Date: <%= round.created_at %> | Score: <%= round.score %> </li>
+  <% end %>
+</ul>

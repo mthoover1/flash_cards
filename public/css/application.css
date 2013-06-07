@@ -10,9 +10,51 @@ th {
   text-align: left;
 }
 
+html {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+body {
+  background: #95A5A6;
+}
+
 nav.top-nav {
-  position: fixed;
   height: 70px;
   width: 100%;
+  background: #7F8C8D;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  z-index: 1;
+}
+
+nav > ul {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
   display: inline;
 }
+
+nav > ul > li {
+  padding: 0 0 0 20px;
+  display: inline;
+  line-height: 70px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+}
+
+nav > ul > li > span {
+  padding-right: 10px;
+  font-size: 30px;
+}
+
+.container {
+  padding-top: 70px;
+}
+
+.container div.card-div {
+  min-height: 200px;
+  width: 400px;
+  background-color: orange;
+}
+
