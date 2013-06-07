@@ -1,4 +1,4 @@
-capitals_list = [ ["Alabama", "Montgomery"],
+capitols_list = [ ["Alabama", "Montgomery"],
                   ["Alaska", "Juneau"],
                   ["Arizona", "Phoenix"],
                   ["Arkansas", "Little Rock"],
@@ -144,8 +144,8 @@ movies_list.each do |movie|
 end
 
 
-capitals = Deck.create(name: "State Capitals")
+capitols = Deck.create(name: "State Capitols")
 
-capitals_list.each do |capital|
-  capitals.cards << Card.create(prompt: capital[0], solution: capital[1])
+capitols_list.each do |capitol|
+  capitols.cards << Card.create(prompt: capitol[0], solution: capitol[1])
 end
