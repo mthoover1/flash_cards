@@ -7,19 +7,20 @@ get '/login' do
   erb :log_in
 end
 
-post '/login' do
-  # @user = User.authenticate(params[form])
-  # if @user
-  #   redirect to '/decks'
-  # else
-  #   redirect to '/'
-  # end
-end
+get '/logout' do
+  session.clear
+end 
 
 get '/decks' do
   @decks = Deck.all
   @round = Round.create
   erb :decks
+end
+
+get '/rounds/:round_id/results' do
+  @round = Round.find_by_id(params[:round_id])
+  @guesses = Guess.find_all_by_round_id(params[:found_id])
+  erb :round_results
 end
 
 get '/rounds/:deck_id/:round_id' do
@@ -41,9 +42,13 @@ post '/rounds/:deck_id/:round_id' do
   redirect "/rounds/#{params[:deck_id]}/#{params[:round_id]}"
 end
 
-get '/rounds/:round_id/results' do
-  @round = Round.find_by_id(params[:round_id])
-  @guesses = Guess.find_all_by_round_id(params[:found_id])
-  erb :round_results
+post '/login' do
+  @user = User.authenticate(params[form])
+  if @user
+    session[:user_id] = @user.id
+    redirect to '/decks'
+  else
+    redirect to '/'
+  end
 end
 
