@@ -22,9 +22,9 @@ get '/decks' do
 end
 
 get '/decks/:deck_id' do
-  @deck = Deck.find_all_by_id(params[:deck_id])
+  @deck = Deck.find_by_id(params[:deck_id])
   @round = Round.create
-  @round.deck << @deck
+  @round.deck = @deck
   erb :round
 end
 
