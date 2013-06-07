@@ -1,5 +1,3 @@
-
-
 state_capitals = [ ["Alabama", "Montgomery"]
                    ["Alaska", "Juneau"]
                    ["Arizona", "Phoenix"]
