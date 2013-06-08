@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :password_hash, presence: true
 
+  def self.create(params)
+    @user = User.new(params)
+    @user.password = params[:password]
+    @user.save!
+    @user
+  end
+
   def password
     @password ||= Password.new(password_hash)
   end 
@@ -16,6 +23,8 @@ class User < ActiveRecord::Base
     @password = Password.create(new_password)
     self.password_hash = @password
   end
+
+
 
   def self.authenticate(email, password)
     user = User.find_by_email(email)

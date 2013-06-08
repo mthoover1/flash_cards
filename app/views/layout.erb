@@ -22,17 +22,15 @@
   <title></title>
 </head>
 <body>
+  <% if logged_in? %>
   <nav class="top-nav">
     <ul>
       <li><a href='/user'><span class="fui-user"></span>profile</a></li>
       <li><a href='/decks'><span class="fui-checkbox-checked"></span>trivia</a></li>
-      <% if logged_in? %>
-      <li><a href='/rounds/<%= @round.id %>/results'><span class="fui-list"></span>results</a></li>
-      <% end %>
-      <li><a href='/user'><span class="fui-cross"></span>logout</a></li>
+      <li><a href='/logout'><span class="fui-cross"></span>logout</a></li>
     </ul>
-
   </nav>
+  <% end %>
   <%= yield %>
 </body>
 </html>

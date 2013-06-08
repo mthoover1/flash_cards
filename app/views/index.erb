@@ -1,11 +1,24 @@
 <div class="container">
-  <% if logged_in? %>
-    <% erb :decks, :layout => false %>
-  <% else %>
-    <% erb :log_in, :layout => false %>
-  <% end %>
 
-  
+  <h1>Trivia</h1>
+
+  <div class="home">
+    <h2>Sign Up</h2>
+    <form action='/signup' method='post'>
+      <input type='text' name='user[name]' placeholder='name' required=true>
+      <input type='text' name='user[email]' placeholder='email' required=true>
+      <input type='text' name='user[password]' placeholder='password' required=true>
+      <input type='submit'>
+    </form>
+  </div>
+  <div class="home">
+    <h2>Login</h2>
+    <form action='/login' method='post'>
+      <input type='text' name='form[email]' placeholder='email' required=true>
+      <input type='text' name='form[password]' placeholder='password' required=true>
+      <input type='submit'>
+    </form>
+  </div>
 
 
 </div>

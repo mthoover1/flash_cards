@@ -67,6 +67,14 @@ form {
   text-align: center;
 }
 
+div.home {
+  width: 49%;
+  display: inline-block;
+  background-color: teal;
+  margin: 0;
+  border: 2px solid purple;
+}
+
 div.deck {
   height: 200px;
   width: 250px;

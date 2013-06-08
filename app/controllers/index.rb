@@ -1,26 +1,17 @@
 get '/' do
-  # Look in app/views/index.erb
-  erb :index
+  if session[:user]
+    redirect '/user'
+  else
+    erb :index
+  end
 end
 
-get '/login' do
-  erb :log_in
-end
-
-get '/logout' do
-  session.clear
-end 
+# DECKS, ROUNDS AND GAMEPLAY ROUTES
 
 get '/decks' do
   @decks = Deck.all
   @round = Round.create
   erb :decks
-end
-
-get '/rounds/:round_id/results' do
-  @round = Round.find_by_id(params[:round_id])
-  @guesses = Guess.find_all_by_round_id(params[:found_id])
-  erb :round_results
 end
 
 get '/rounds/:deck_id/:round_id' do
@@ -30,7 +21,7 @@ get '/rounds/:deck_id/:round_id' do
   deck_card_ids = @deck.cards.all.map(&:id)
   remaining_cards = deck_card_ids - guessed_card_ids
   if remaining_cards.empty?
-    redirect to '/rounds/' + @round.id.to_s + '/results'
+    redirect to "/rounds/#{@round.id}/results"
   else
     @card = Card.find(remaining_cards.sample)
     erb :round_card
@@ -42,19 +33,41 @@ post '/rounds/:deck_id/:round_id' do
   redirect "/rounds/#{params[:deck_id]}/#{params[:round_id]}"
 end
 
+get '/rounds/:round_id/results' do
+  @round = Round.find_by_id(params[:round_id])
+  @guesses = Guess.find_all_by_round_id(params[:found_id])
+  erb :round_results
+end
+
+# USER PAGE AND LOGIN / LOGOUT ROUTES
+
 post '/login' do
-  @user = User.authenticate(params[form])
+  @user = User.authenticate(params[:form][:email], params[:form][:email])
   if @user
-    session[:user_id] = @user.id
+    session[:user] = @user.id
     redirect to '/decks'
   else
     redirect to '/'
   end
 end
 
-post '/user' do
+post '/signup' do
+  if @user = User.create(params[:user])
+    session[:user] = @user.id
+    erb :decks
+  else
+    @errors = @user.errors
+    redirect '/'
+  end
+end
+
+get '/user' do
   @user = current_user
   redirect to '/login' unless @user
   erb :user
 end
 
+get '/logout' do
+  session.clear
+  redirect '/'
+end
