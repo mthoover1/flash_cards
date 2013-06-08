@@ -127,3 +127,10 @@ span.card {
   /*text-shadow: 3px 3px 3px #16A085;*/
 }
 
+#results {
+  list-style: none;
+}
+
+#results li.right {
+  color: green;
+}

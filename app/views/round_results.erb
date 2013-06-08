@@ -1,8 +1,17 @@
 <div class="container">
-    <% @guesses.each do |guess| %>
-      <span class='guess'><%= guess.response %></span>
-      <span class='guess'><%= guess.correctness %></span>
-    <% end %>
+  <% @guesses.each do |guess| %>
+    <span class='guess'><%= guess.response %></span>
+    <span class='guess'><%= guess.correctness %></span>
+  <% end %>
+
+
+  <ul id="results">
+  <% @guesses.each do |guess| %>
+    <% %>
+    <li class="<% guess.correctness %>"><%= guess.question %> | <%= guess.response %></li>
+  <% end %>
+  </ul>
+
 </div>
 
 <a href='/rounds/<%= @guesses.first.round.deck_id %>'>PLAY DECK AGAIN</a>
