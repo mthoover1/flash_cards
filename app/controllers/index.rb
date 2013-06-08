@@ -58,7 +58,7 @@ end
 post '/signup' do
   if @user = User.create(params[:user])
     session[:user] = @user.id
-    erb :decks
+    redirect '/decks'
   else
     @errors = @user.errors
     redirect '/'
