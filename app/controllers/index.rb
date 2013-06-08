@@ -11,12 +11,14 @@ end
 get '/decks' do
   @decks = Deck.all
   @round = Round.create
+  @round.update_attribute(:user_id, current_user.id)
   erb :decks
 end
 
 get '/rounds/:deck_id/:round_id' do
   @deck = Deck.find(params[:deck_id])
   @round = Round.find(params[:round_id])
+  @round.update_attribute(:deck_id, @deck.id)
   guessed_card_ids = Guess.all.map(&:card_id)
   deck_card_ids = @deck.cards.all.map(&:id)
   remaining_cards = deck_card_ids - guessed_card_ids
