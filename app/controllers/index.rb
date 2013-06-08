@@ -15,6 +15,12 @@ get '/decks' do
   erb :decks
 end
 
+get '/rounds/:round_id/results' do
+  @round = Round.find_by_id(params[:round_id])
+  @guesses = Guess.find_all_by_round_id(params[:round_id])
+  erb :round_results
+end
+
 get '/rounds/:deck_id/:round_id' do
   @deck = Deck.find(params[:deck_id])
   @round = Round.find(params[:round_id])
@@ -35,11 +41,7 @@ post '/rounds/:deck_id/:round_id' do
   redirect "/rounds/#{params[:deck_id]}/#{params[:round_id]}"
 end
 
-get '/rounds/:round_id/results' do
-  @round = Round.find_by_id(params[:round_id])
-  @guesses = Guess.find_all_by_round_id(params[:found_id])
-  erb :round_results
-end
+
 
 # USER PAGE AND LOGIN / LOGOUT ROUTES
 
