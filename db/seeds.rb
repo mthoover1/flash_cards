@@ -149,3 +149,61 @@ capitols = Deck.create(name: "State Capitols")
 capitols_list.each do |capitol|
   capitols.cards << Card.create(prompt: capitol[0], solution: capitol[1])
 end
+
+
+
+class NBAScraper
+  attr_reader :webpage, :url, :teams, :names, :pages
+
+  def initialize
+    @pages = [
+        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws",
+        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=100",
+        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=200",
+        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=300"
+        ]
+    @names = []
+    @teams = []
+    @url = ""
+    @webpage = ""
+
+    @pages.each do |page|
+      @url = page
+      @webpage = fetch!
+      find_players!
+      find_teams!
+    end
+  end
+
+  def fetch!
+    uri = URI.parse(@url)
+    response = Net::HTTP.get_response(uri)
+    Nokogiri::HTML(response.body)
+  end
+
+  def find_players!
+    @webpage.css("tbody tr td:nth-child(2)").map {|noko| @names << noko.text}
+  end
+
+  def find_teams!
+    @webpage.css("tbody tr td:nth-child(6)").map {|noko| @teams << noko.text}
+  end
+end
+
+scraper = NBAScraper.new
+
+players_list = scraper.names.zip(scraper.teams)
+
+players_list.each_with_index do |player, i|
+  if player[1] == "TOT"
+    players_list.delete_at(i)
+  end
+end
+
+
+
+players = Deck.create(name: "Who He Play For?")
+
+players_list.each do |player|
+  players.cards << Card.create(prompt: player[0], solution: player[1])
+end
