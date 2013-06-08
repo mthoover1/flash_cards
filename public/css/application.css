@@ -35,7 +35,7 @@ nav > ul {
 }
 
 nav > ul > li {
-  padding: 0 0 0 20px;
+  padding: 0 5px 0 20px;
   display: inline;
   line-height: 70px;
   font-size: 20px;
@@ -46,6 +46,7 @@ nav > ul > li {
 nav > ul > li a {
   color: white;
   text-decoration: none;
+  text-shadow: 1px 1px 1px #545454;
   
 }
 
@@ -58,7 +59,7 @@ nav > ul > li a:hover span {
 }
 
 nav > ul > li > a > span {
-  padding-right: 10px;
+  padding-right: 6px;
   font-size: 30px;
 }
 
@@ -90,7 +91,7 @@ span.card {
   font-family: 'Titillium Web', sans-serif;
   text-shadow: 1px 1px 2px black;
   font-size: 40px;
-  color: #1ABC9C;
+  color: #5CDBC2;
   /*text-shadow: 3px 3px 3px #16A085;*/
 }
 
