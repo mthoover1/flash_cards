@@ -152,58 +152,11 @@ end
 
 
 
-class NBAScraper
-  attr_reader :webpage, :url, :teams, :names, :pages
-
-  def initialize
-    @pages = [
-        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws",
-        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=100",
-        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=200",
-        "http://www.basketball-reference.com/play-index/psl_finder.cgi?request=1&match=single&type=totals&per_minute_base=36&lg_id=NBA&is_playoffs=N&year_min=2013&year_max=2013&franch_id=&season_start=1&season_end=-1&age_min=0&age_max=99&height_min=0&height_max=99&birth_country_is=Y&birth_country=&is_active=&is_hof=&is_as=&as_comp=gt&as_val=&pos_is_g=Y&pos_is_gf=Y&pos_is_f=Y&pos_is_fg=Y&pos_is_fc=Y&pos_is_c=Y&pos_is_cf=Y&qual=&c1stat=g&c1comp=gt&c1val=30&c2stat=mp_per_g&c2comp=gt&c2val=12&c3stat=&c3comp=gt&c3val=&c4stat=&c4comp=gt&c4val=&c5stat=&c5comp=gt&c6mult=1.0&c6stat=&order_by=ws&order_by_asc=&offset=300"
-        ]
-    @names = []
-    @teams = []
-    @url = ""
-    @webpage = ""
-
-    @pages.each do |page|
-      @url = page
-      @webpage = fetch!
-      find_players!
-      find_teams!
-    end
-  end
-
-  def fetch!
-    uri = URI.parse(@url)
-    response = Net::HTTP.get_response(uri)
-    Nokogiri::HTML(response.body)
-  end
-
-  def find_players!
-    @webpage.css("tbody tr td:nth-child(2)").map {|noko| @names << noko.text}
-  end
-
-  def find_teams!
-    @webpage.css("tbody tr td:nth-child(6)").map {|noko| @teams << noko.text}
-  end
-end
-
-scraper = NBAScraper.new
-
-players_list = scraper.names.zip(scraper.teams)
-
-players_list.each_with_index do |player, i|
-  if player[1] == "TOT"
-    players_list.delete_at(i)
-  end
-end
-
-
+players_list = [["LeBron James", "MIA"], ["Kevin Durant", "OKC"], ["Chris Paul", "LAC"], ["James Harden", "HOU"], ["Russell Westbrook", "OKC"], ["Marc Gasol", "MEM"], ["Stephen Curry", "GSW"], ["Kobe Bryant", "LAL"], ["Deron Williams", "BRK"], ["Blake Griffin", "LAC"], ["Mike Conley", "MEM"], ["George Hill", "IND"], ["Dwyane Wade", "MIA"], ["Carmelo Anthony", "NYK"], ["Serge Ibaka", "OKC"], ["Tyson Chandler", "NYK"], ["Tony Parker", "SAS"], ["David Lee", "GSW"], ["David West", "IND"], ["Chris Bosh", "MIA"], ["Paul George", "IND"], ["Brook Lopez", "BRK"], ["Al Horford", "ATL"], ["Tim Duncan", "SAS"], ["Tiago Splitter", "SAS"], ["Zach Randolph", "MEM"], ["Kenneth Faried", "DEN"], ["Al Jefferson", "UTA"], ["Dwight Howard", "LAL"], ["Paul Millsap", "UTA"], ["Ty Lawson", "DEN"], ["Thaddeus Young", "PHI"], ["Amir Johnson", "TOR"], ["Joakim Noah", "CHI"], ["LaMarcus Aldridge", "POR"], ["Danilo Gallinari", "DEN"], ["Paul Pierce", "BOS"], ["Jimmy Butler", "CHI"], ["Kevin Martin", "OKC"], ["Chandler Parsons", "HOU"], ["J.J. Hickson", "POR"], ["Thabo Sefolosha", "OKC"], ["Ersan Ilyasova", "MIL"], ["Nikola Pekovic", "MIN"], ["J.R. Smith", "NYK"], ["Ryan Anderson", "NOH"], ["Kosta Koufos", "DEN"], ["Kyle Korver", "ATL"], ["Matt Barnes", "LAC"], ["Luol Deng", "CHI"], ["Martell Webster", "WAS"], ["DeAndre Jordan", "LAC"], ["Carl Landry", "GSW"], ["Kawhi Leonard", "SAS"], ["Anthony Davis", "NOH"], ["Roy Hibbert", "IND"], ["Jeff Teague", "ATL"], ["Vince Carter", "DAL"], ["Andrei Kirilenko", "MIN"], ["Larry Sanders", "MIL"], ["Danny Green", "SAS"], ["Greg Monroe", "DET"], ["Nate Robinson", "CHI"], ["Nicolas Batum", "POR"], ["Brandon Jennings", "MIL"], ["Damian Lillard", "POR"], ["Carlos Boozer", "CHI"], ["Goran Dragic", "PHO"], ["Nikola Vucevic", "ORL"], ["Darren Collison", "DAL"], ["Kevin Garnett", "BOS"], ["Andre Iguodala", "DEN"], ["Jarrett Jack", "GSW"], ["Robin Lopez", "NOH"], ["Kyle Lowry", "TOR"], ["Omer Asik", "HOU"], ["Lance Stephenson", "IND"], ["Ray Allen", "MIA"], ["Jamal Crawford", "LAC"], ["Gordon Hayward", "UTA"], ["Jason Kidd", "NYK"], ["Jeremy Lin", "HOU"], ["Andre Miller", "DEN"], ["Kyrie Irving", "CLE"], ["Shawn Marion", "DAL"], ["Mario Chalmers", "MIA"], ["Nick Collison", "OKC"], ["Tristan Thompson", "CLE"], ["Tony Allen", "MEM"], ["Joe Johnson", "BRK"], ["Dirk Nowitzki", "DAL"], ["Isaiah Thomas", "SAC"], ["Andray Blatche", "BRK"], ["JaVale McGee", "DEN"], ["Dorell Wright", "PHI"], ["Jared Dudley", "PHO"], ["Kemba Walker", "CHA"], ["Brandon Bass", "BOS"], ["DeMar DeRozan", "TOR"], ["Jeff Green", "BOS"], ["Wesley Matthews", "POR"], ["Monta Ellis", "MIL"], ["Metta World Peace", "LAL"], ["Andre Drummond", "DET"], ["Manu Ginobili", "SAS"], ["Spencer Hawes", "PHI"], ["Emeka Okafor", "WAS"], ["John Wall", "WAS"], ["Shane Battier", "MIA"], ["DeMarcus Cousins", "SAC"], ["Boris Diaw", "SAS"], ["Mike Dunleavy", "MIL"], ["Tyreke Evans", "SAC"], ["Derrick Favors", "UTA"], ["Tyler Hansbrough", "IND"], ["Luis Scola", "PHO"], ["Reggie Evans", "BRK"], ["Antawn Jamison", "LAL"], ["Steve Nash", "LAL"], ["Luke Ridnour", "MIN"], ["Klay Thompson", "GSW"], ["Raymond Felton", "NYK"], ["O.J. Mayo", "DAL"], ["Josh Smith", "ATL"], ["Brandan Wright", "DAL"], ["Jerryd Bayless", "MEM"], ["Nene Hilario", "WAS"], ["Steve Novak", "NYK"], ["Greg Smith", "HOU"], ["Jason Terry", "BOS"], ["Corey Brewer", "DEN"], ["Jonas Valanciunas", "TOR"], ["Greivis Vasquez", "NOH"], ["C.J. Watson", "BRK"], ["Eric Bledsoe", "LAC"], ["Randy Foye", "UTA"], ["Pau Gasol", "LAL"], ["Caron Butler", "LAC"], ["Jason Thompson", "SAC"], ["Dante Cunningham", "MIN"], ["Carlos Delfino", "HOU"], ["Elton Brand", "DAL"], ["Marcin Gortat", "PHO"], ["Taj Gibson", "CHI"], ["Devin Harris", "ATL"], ["Gerald Henderson", "CHA"], ["Jrue Holiday", "PHI"], ["Courtney Lee", "BOS"], ["Udonis Haslem", "MIA"], ["Quincy Pondexter", "MEM"], ["Pablo Prigioni", "NYK"], ["Rajon Rondo", "BOS"], ["Marcus Thornton", "SAC"], ["Al-Farouq Aminu", "NOH"], ["Trevor Ariza", "WAS"], ["DeMarre Carroll", "UTA"], ["Wilson Chandler", "DEN"], ["Kirk Hinrich", "CHI"], ["Gerald Wallace", "BRK"], ["Chris Wilcox", "BOS"], ["Bradley Beal", "WAS"], ["Marco Belinelli", "CHI"], ["Jodie Meeks", "LAL"], ["Ricky Rubio", "MIN"], ["Derrick Williams", "MIN"], ["Ramon Sessions", "CHA"], ["P.J. Tucker", "PHO"], ["D.J. Augustin", "IND"], ["Harrison Barnes", "GSW"], ["Chris Andersen", "MIA"], ["Kris Humphries", "BRK"], ["Lamar Odom", "LAC"], ["Zaza Pachulia", "ATL"], ["Jared Sullinger", "BOS"], ["Ekpe Udoh", "MIL"], ["C.J. Miles", "CLE"], ["Mike Miller", "MIA"], ["Lavoy Allen", "PHI"], ["Matt Bonner", "SAS"], ["Willie Green", "LAC"], ["Reggie Jackson", "OKC"], ["Kendrick Perkins", "OKC"], ["Rodney Stuckey", "DET"], ["Steve Blake", "LAL"], ["Maurice Harkless", "ORL"], ["Meyers Leonard", "POR"], ["Louis Williams", "ATL"], ["Trevor Booker", "WAS"], ["Earl Clark", "LAL"], ["Ivan Johnson", "ATL"], ["Enes Kanter", "UTA"], ["Ian Mahinmi", "IND"], ["Kyle Singler", "DET"], ["Marvin Williams", "UTA"], ["Nick Young", "PHI"], ["Patrick Beverley", "HOU"], ["DeJuan Blair", "SAS"], ["Samuel Dalembert", "MIL"], ["A.J. Price", "WAS"], ["Brian Roberts", "NOH"], ["Chris Copeland", "NYK"], ["Michael Kidd-Gilchrist", "CHA"], ["Jameer Nelson", "ORL"], ["Evan Turner", "PHI"], ["Arron Afflalo", "ORL"], ["Jonas Jerebko", "DET"], ["Jermaine O'Neal", "PHO"], ["Tyler Zeller", "CLE"], ["Jose Barea", "MIN"], ["Alonzo Gee", "CLE"], ["John Henson", "MIL"], ["Gary Neal", "SAS"], ["Iman Shumpert", "NYK"], ["Damien Wilkins", "PHI"], ["Jason Maxiell", "DET"], ["Mo Williams", "UTA"], ["Darrell Arthur", "MEM"], ["Andrew Bogut", "GSW"], ["Will Bynum", "DET"], ["John Jenkins", "ATL"], ["Markieff Morris", "PHO"], ["Andrew Nicholson", "ORL"], ["Jason Smith", "NOH"], ["Greg Stiemsma", "MIN"], ["Alan Anderson", "TOR"], ["Chris Kaman", "DAL"], ["John Salmons", "SAC"], ["Charlie Villanueva", "DET"], ["Jae Crowder", "DAL"], ["Festus Ezeli", "GSW"], ["Mickael Gelabale", "MIN"], ["Chuck Hayes", "SAC"], ["Orlando Johnson", "IND"], ["DeShawn Stevenson", "ATL"], ["Bismack Biyombo", "CHA"], ["Keith Bogans", "BRK"], ["Roger Mason", "NOH"], ["Jason Richardson", "PHI"], ["MarShon Brooks", "BRK"], ["Nando De Colo", "SAS"], ["Gerald Green", "IND"], ["Shannon Brown", "PHO"], ["Rashard Lewis", "MIA"], ["Jeff Taylor", "CHA"], ["Garrett Temple", "WAS"], ["Anthony Tolliver", "ATL"], ["Landry Fields", "TOR"], ["Jimmer Fredette", "SAC"], ["Eric Gordon", "NOH"], ["Brandon Knight", "DET"], ["John Lucas", "TOR"], ["Jeff Adrien", "CHA"], ["Alec Burks", "UTA"], ["Chris Duhon", "LAL"], ["Royal Ivey", "PHI"], ["Leandro Barbosa", "BOS"], ["Terrence Ross", "TOR"], ["Jamaal Tinsley", "UTA"], ["Dion Waiters", "CLE"], ["Sam Young", "IND"], ["Glen Davis", "ORL"], ["Alexey Shved", "MIN"], ["Luke Walton", "CLE"], ["Cartier Martin", "WAS"], ["Donatas Motiejunas", "HOU"], ["Norris Cole", "MIA"], ["Draymond Green", "GSW"], ["Marquis Daniels", "MIL"], ["Daniel Gibson", "CLE"], ["Aaron Gray", "TOR"], ["Luc Mbah a Moute", "MIL"], ["Darius Miller", "NOH"], ["Chris Singleton", "WAS"], ["Rodrigue Beaubois", "DAL"], ["Avery Bradley", "BOS"], ["Richard Hamilton", "CHI"], ["Mike James", "DAL"], ["Jerry Stackhouse", "BRK"], ["Stephen Jackson", "SAS"], ["E'Twaun Moore", "ORL"], ["Darius Morris", "LAL"], ["Andrea Bargnani", "TOR"], ["Brendan Haywood", "CHA"], ["DeQuan Jones", "ORL"], ["Byron Mullens", "CHA"], ["Sasha Pavlovic", "POR"], ["Kevin Seraphin", "WAS"], ["Xavier Henry", "NOH"], ["Wesley Johnson", "PHO"], ["Earl Watson", "UTA"], ["Victor Claver", "POR"], ["Kendall Marshall", "PHO"], ["Ronnie Price", "POR"], ["Will Barton", "POR"], ["James Johnson", "SAC"], ["Ben Gordon", "CHA"], ["Austin Rivers", "NOH"], ["Michael Beasley", "PHO"]]
 
 players = Deck.create(name: "Who He Play For?")
 
 players_list.each do |player|
   players.cards << Card.create(prompt: player[0], solution: player[1])
 end
+
