@@ -1,8 +1,7 @@
 .container {
-  margin: 20px auto;
+  margin: 0px auto;
   width: 600px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+  padding: 100px 20px 20px 20px;
 }
 
 
@@ -20,6 +19,7 @@ body {
 }
 
 nav.top-nav {
+  position: fixed;
   height: 70px;
   width: 100%;
   background: #7F8C8D;
@@ -43,18 +43,54 @@ nav > ul > li {
   color: white;
 }
 
-nav > ul > li > span {
+nav > ul > li a {
+  color: white;
+  text-decoration: none;
+  
+}
+
+nav > ul > li a:hover {
+  color: #DBA2F2;
+}
+
+nav > ul > li a:hover span {
+  color: #79E8D2;
+}
+
+nav > ul > li > a > span {
   padding-right: 10px;
   font-size: 30px;
 }
 
-.container {
-  padding-top: 70px;
+form {
+  display: block;
+  text-align: center;
 }
 
 .container div.card-div {
-  min-height: 200px;
-  width: 400px;
-  background-color: orange;
+  height: 225px;
+  width: 375px;
+  background-color: #8E44AD;
+  margin: 40px auto;
+  padding: 10px 20px 7px 20px;
+  border-bottom: 3px solid #642F7A;
+  border-right: 3px solid #642F7A;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -moz-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -o-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -ms-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+}
+
+span.card {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-family: 'Titillium Web', sans-serif;
+  text-shadow: 1px 1px 2px black;
+  font-size: 40px;
+  color: #1ABC9C;
+  /*text-shadow: 3px 3px 3px #16A085;*/
 }
 

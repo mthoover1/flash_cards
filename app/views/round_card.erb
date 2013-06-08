@@ -4,9 +4,8 @@
         <input type="text" name="form[response]" required=true>
         <input type='hidden' name="form[card_id]" value="<%= @card.id %>">
         <input type='hidden' name="form[round_id]" value="<%= @round.id %>">
-        <input type="submit" >
+        <button class='btn' type="submit" >SUBMIT</button>
       </form>
-      <span class='card'><%= @card.solution %></span>
 </div>
 
 <a href='/decks'>SELECT NEW DECK</a>
