@@ -1,7 +1,11 @@
 <div class="container">
   <% if @decks %>
     <% @decks.each do |deck| %>
-      <a href='/rounds/<%= deck.id %>/<%= @round.id %>'><span class='deck'><%= deck.name %></span></a>
+      <a href='/rounds/<%= deck.id %>/<%= @round.id %>'>
+      <div class="deck">
+        <p class='deck'><%= deck.name %></p>
+      </div>
+      </a>
     <% end %>
   <% end %>
 </div>

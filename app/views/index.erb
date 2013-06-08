@@ -1,7 +1,11 @@
 <div class="container">
   <% if logged_in? %>
-  <% erb :decks, :layout => false %>
+    <% erb :decks, :layout => false %>
   <% else %>
-  <% erb :log_in, :layout => false %>
+    <% erb :log_in, :layout => false %>
   <% end %>
+
+  
+
+
 </div>

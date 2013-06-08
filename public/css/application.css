@@ -47,7 +47,6 @@ nav > ul > li a {
   color: white;
   text-decoration: none;
   text-shadow: 1px 1px 1px #545454;
-  
 }
 
 nav > ul > li a:hover {
@@ -66,6 +65,31 @@ nav > ul > li > a > span {
 form {
   display: block;
   text-align: center;
+}
+
+div.deck {
+  height: 200px;
+  width: 250px;
+  background-color: teal;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+div.deck p {
+  color: purple;
+  line-height: 200px;
+  width: 100%;
+  font-size: 28px;
+  margin: 0;
+  text-align: center;
+}
+
+.round-name {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  color: #642F7A;
 }
 
 .container div.card-div {
