@@ -101,6 +101,7 @@ div.deck p {
 }
 
 .container div.card-div {
+  display: table;
   height: 225px;
   width: 375px;
   background-color: #8E44AD;
@@ -116,10 +117,17 @@ div.deck p {
   box-shadow: rgba(0,0,0,.2) 4px 4px 0;
 }
 
+/*  THIS TABLE METHOD ISN'T REALLY WORKING (ABOVE & BELOW THIS LINE)*/
+
+span.card div.inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 span.card {
   display: block;
   text-align: center;
-  line-height: 200px;
+  /*line-height: 200px;*/
   font-family: 'Titillium Web', sans-serif;
   text-shadow: 1px 1px 2px black;
   font-size: 40px;
@@ -127,10 +135,17 @@ span.card {
   /*text-shadow: 3px 3px 3px #16A085;*/
 }
 
-#results {
-  list-style: none;
+table.results {
+  line-height: 24px;
+  font-size: 18px;
+  /*margin-left: 40px;*/
 }
 
-#results li.right {
-  color: green;
+table.results td {
+  padding-right: 25px;
+}
+
+div.round-score {
+  margin-top: 40px;
+  font-size: 24px;
 }

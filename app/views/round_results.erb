@@ -1,18 +1,31 @@
 <div class="container">
-  <% @guesses.each do |guess| %>
-    <span class='guess'><%= guess.response %></span>
-    <span class='guess'><%= guess.correctness %></span>
-  <% end %>
 
+  <h1>Results</h1>
 
-  <ul id="results">
-  <% @guesses.each do |guess| %>
-    <% %>
-    <li class="<% guess.correctness %>"><%= guess.question %> | <%= guess.response %></li>
-  <% end %>
-  </ul>
+  <table class="results">
+    <% @guesses.each do |guess| %>
+      <tr>
+        <td>
+          <% if guess.correctness != 0 %>
+          <span class="fui-check" style="color: darkgreen"></span>
+          <% else %>
+          <span class="fui-cross" style="color: darkred"></span>
+          <% end %>
+        </td>
+        
+        <td><%= guess.prompt %></td>
+        
+        <td <% if guess.correctness == 0 %> style="color: darkred"<% end %>><%= guess.response %></td>
+        
+        <td style="color: darkgreen"><% if guess.correctness == 0 %>
+            <%= guess.solution %>
+            <% end %></td>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
+  <div class="round-score">
+    <p>SCORE: <%= @round.score %>%</p>
+  </div>
 </div>
-
-<a href='/rounds/<%= @guesses.first.round.deck_id %>'>PLAY DECK AGAIN</a>
-<a href='/decks'>SELECT NEW DECK</a>

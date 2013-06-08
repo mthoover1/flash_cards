@@ -1,6 +1,10 @@
 <div class="container">
       <div class='round-name'><h1><%= @deck.name %></h1></div>
-      <div class='card-div'><span class='card'><%= @card.prompt %></span></div>
+      <div class='card-div'>
+        <div class='inner'>
+          <span class='card'><%= @card.prompt %></span>
+        </div>
+      </div>
       <form action='/rounds/<%= @deck.id %>/<%= @round.id %>' method='post'>
         <input type="text" id="response-box" name="form[response]" required=true autofocus>
         <input type='hidden' name="form[card_id]" value="<%= @card.id %>">
