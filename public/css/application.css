@@ -1,6 +1,6 @@
 .container {
   margin: 0px auto;
-  width: 600px;
+  width: 640px;
   padding: 100px 20px 20px 20px;
 }
 
@@ -76,17 +76,26 @@ div.home {
 }
 
 div.deck {
-  height: 200px;
-  width: 250px;
-  background-color: teal;
+  height: 168px;
+  width: 280px;
+  background-color: #8E44AD;
   display: inline-block;
-  border: 1px solid black;
-  margin: 20px;
+  border-bottom: 3px solid #642F7A;
+  border-right: 3px solid #642F7A;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -moz-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -o-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -ms-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  margin: 15px;
 }
 
 div.deck p {
-  color: purple;
-  line-height: 200px;
+  color: #5CDBC2;
+  font-family: 'Titillium Web', sans-serif;
+  text-shadow: 1px 1px 2px black;
+  line-height: 168px;
   width: 100%;
   font-size: 28px;
   margin: 0;
