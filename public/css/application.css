@@ -208,6 +208,11 @@ table.user-history td a {
   padding-right: 40px;
 }
 
+table.user-history td a:hover {
+  color: #8E44AD;
+  text-decoration: underline;; 
+}
+
 div.show-results {
   width: 50%;
   text-align: center;
