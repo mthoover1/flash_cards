@@ -67,6 +67,7 @@ end
 
 get '/user' do
   @user = current_user
+  @rounds = Round.find_all_by_user_id(@user.id)
   redirect to '/login' unless @user
   erb :user
 end

@@ -1,5 +1,24 @@
 <div class="container"> 
-  <h2><%= @user.name %></h2>
-  <h2><%= @user.email %></h2>
-  <h2><%= @user.password_hash %></h2>
+  <h1><%= @user.name %></h1>
+
+  <h2>Games Played</h2>
+
+  <table class="user-history">
+  <tr>
+  	<td>Deck</td>
+  	<td>Cards</td>
+  	<td>Score</td>
+  	<td>Date</td>
+  </tr>
+  <% @rounds.reverse_each do |round| %>
+  <%	if round.guesses.count > 1 %>
+  <tr>
+  	<td><a href='/rounds/<%= round.id %>/results'><%= Deck.find(round.deck_id).name %></a></td>
+  	<td><%= round.guesses.count %></td>
+  	<td><%= round.score %>%</td>
+  	<td><%= round.updated_at.to_s[0..15] %></td>
+  </tr>
+  	<% end %>
+  <% end %>
+  </table?
 </div>
