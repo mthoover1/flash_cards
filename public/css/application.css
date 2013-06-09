@@ -208,3 +208,14 @@ table.user-history td a {
   padding-right: 40px;
 }
 
+div.show-results {
+  width: 50%;
+  text-align: center;
+  margin: 50px auto 0 auto;
+}
+
+div.show-results a {
+  text-decoration: none;
+  font-size: 26px;
+  color: #642F7A;
+}

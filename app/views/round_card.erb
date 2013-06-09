@@ -9,10 +9,14 @@
         <input type="text" id="response-box" name="form[response]" required=true autofocus>
         <input type='hidden' name="form[card_id]" value="<%= @card.id %>">
         <input type='hidden' name="form[round_id]" value="<%= @round.id %>">
-        <button class='btn' type="submit" >SUBMIT</button>
+        <button class='btn' type="submit">SUBMIT</button>
       </form>
 
-      <li><a href='/rounds/<%= @round.id %>/results'><span class="fui-list"></span>results</a></li>
+      <% if @round.guesses.count > 0 %>
+      <div class="show-results">
+        <a href='/rounds/<%= @round.id %>/results'><span class="fui-list"></span> results</a>
+      </div>
+      <% end %>
 </div>
 
 <!--select new deck is redundant-->
