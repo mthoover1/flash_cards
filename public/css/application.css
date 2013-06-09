@@ -68,11 +68,33 @@ form {
 }
 
 div.home {
-  width: 49%;
+  width: 46%;
+  height: 270px;
   display: inline-block;
-  background-color: teal;
-  margin: 0;
-  border: 2px solid purple;
+  vertical-align: top;
+  background-color: #8E44AD;
+  margin: 5px;
+  border-bottom: 3px solid #642F7A;
+  border-right: 3px solid #642F7A;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -moz-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -o-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  -ms-box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+  box-shadow: rgba(0,0,0,.2) 4px 4px 0;
+}
+
+div.home h2 {
+  font-family: 'Titillium Web', sans-serif;
+  text-shadow: 1px 1px 2px black;
+  font-size: 30px;
+  color: #5CDBC2;
+  padding: 0 0 15px 15px;
+}
+
+div.home input.btn {
+  margin-top: 12px;
+  width: 80px;
 }
 
 div.deck {
